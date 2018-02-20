@@ -10,6 +10,8 @@ public interface TopicService {
 	public Topic getTopicById(String name);
 	public void addTopic(Topic topic);
 	public void addInitialTopic();
+	public void updateTopicById(int id, Topic topic);
+	public List<Topic> getAllTempList();
 											
 
 }

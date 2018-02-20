@@ -20,15 +20,19 @@ public class TopicController {
 	
 	@Autowired
 	private TopicService topicService;
+
+	@RequestMapping("/getinitial")
+	public List<Topic> getTempTopicList()
+	{
+		return topicService.getAllTempList();
+	}
 	
-
-
-
 	@RequestMapping("/initial")
 	public void listOfTpoics()
 	{
 		topicService.addInitialTopic();
 	}
+	
 	
 	@RequestMapping("/topic")
 	public List<Topic> getTopicList()
@@ -36,7 +40,7 @@ public class TopicController {
 		return topicService.getAllList();
 	}
 	
-	@RequestMapping("/topic/{topicId}")
+	@RequestMapping(value="/topic/{topicId}",method=RequestMethod.GET)
 	public Topic getTopicById(@PathVariable String topicId)
 	{
 		return topicService.getTopicById(topicId);
@@ -47,6 +51,13 @@ public class TopicController {
 	public void addTopic(@RequestBody Topic topic)
 	{
 		topicService.addTopic(topic);
+	}
+	
+	@RequestMapping(value="/topic/{id}",method=RequestMethod.PUT)
+	public String updateTopicWithId(@PathVariable String id,@RequestBody Topic topic)
+	{
+		topicService.updateTopicById(Integer.parseInt(id),topic);
+		return "successfully updated..";
 	}
 	
 }
